@@ -1,16 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
 
-const Card = () => {
+const Card = (props) => {
     return (
-        <View style={styles.inputContainer}>
-                <Text>Select a Number</Text>
-                <TextInput />
-                <View style={styles.buttonContainer}>
-                    <Button title="Reset" onPress={()=>{}}/>
-                    <Button title="Confirm" onPress={()=>{}}/>
-                </View>
-            </View>
+        <View style={{...styles.card, ...props.style}}>{props.children}</View>
     )
 }
 
@@ -22,10 +15,7 @@ const styles = StyleSheet.create({
         justifyContent:"space-between",
         width:"100%"  
     },
-    inputContainer:{
-      width:300,
-      maxWidth:'80%',
-      alignItems:"center",
+    card:{
       shadowColor:"black",
       shadowOffset:{width:0, height: 2},
       shadowRadius:6,
