@@ -39,7 +39,7 @@ const GameScreen = (props) => {
  
 
   const nextGuessHandler = (direction) => {
-    console.log("Current direction is", direction);
+    // console.log("Current direction is", direction);
     if (
       (direction === "lower" && currentGuess < props.userChoice) ||
       (direction === "greater" && currentGuess > props.userChoice)

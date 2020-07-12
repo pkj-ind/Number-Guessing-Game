@@ -16,13 +16,18 @@ export default function App() {
   const gameOver =(numOfAttempts) =>{
     setAttemptCount(numOfAttempts);
   }
+
+  const reStartGame = () => {
+    setuserNumber('');
+    setAttemptCount(0);
+  }
   let content = <StartGameScreen onStartGame={startGameHandler} />;
 
   if (userNumber) {
     content = <GameScreen userChoice={userNumber} onGameOver={gameOver}/>;
   }
   if (attemptCount > 0){
-    content = <GameOverScreen attemptCount={attemptCount}/>;
+    content = <GameOverScreen attemptCount={attemptCount} onRestart={reStartGame} selectedNumber={userNumber}/>;
   }
   return (
     <View style={styles.screen}>
