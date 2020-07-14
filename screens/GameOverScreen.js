@@ -9,7 +9,8 @@ const GameOverScreen = (props) => {
     <View style={styles.screen}>
       <View style={styles.imageContainer}>
       <Image
-        source={require("../assets/success.png")}
+        // source={require("../assets/success.png")}
+        source={{uri:'https://www.scitecheuropa.eu/wp-content/uploads/2020/01/Mount-Everest.jpg'}}
         style={styles.image}
         resizeMode="cover"
       />
