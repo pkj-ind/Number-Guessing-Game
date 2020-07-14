@@ -11,6 +11,8 @@ import {
 import Card from "../components/Card";
 import Colors from "../Constants/Colors";
 import Input from "../components/Input";
+import BodyText from "../components/BodyText"
+import TitleText from "../components/TitleText"
 import NumberContainer from "../components/NumberContainer"
 
 const StartGameScreen = (props) => {
@@ -59,9 +61,9 @@ const StartGameScreen = (props) => {
       }}
     >
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        <TitleText style={styles.title}>Start a New Game!</TitleText>
         <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
+          <BodyText>Select a Number</BodyText>
           <Input
             style={styles.input}
             blurOnSubmit
@@ -116,8 +118,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 20,
-    marginVertical: 10,
+    fontSize: 20
   },
   button: {
     width: 100,

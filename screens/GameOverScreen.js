@@ -1,17 +1,20 @@
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import Card from "../components/Card";
+import BodyText from "../components/BodyText"
+import TitleText from "../components/TitleText"
+
 
 const GameOverScreen = (props) => {
   return (
     <View style={styles.screen}>
       <Card style={styles.summaryContainer}>
-        <Text style={styles.text}>
+        <TitleText>
           Hey ! Your number was: {props.selectedNumber}
           {"\n"}
-        </Text>
-        <Text>Number of Guesses taken by Mobile: {props.attemptCount}</Text>
-        <Text>The Game is Over !!!{"\n"}</Text>
+        </TitleText>
+        <BodyText>Number of Guesses taken by Mobile: {props.attemptCount}</BodyText>
+        <BodyText>The Game is Over !!!{"\n"}</BodyText>
         <Button
           title="Start Again"
           onPress={props.onRestart}
@@ -31,11 +34,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   summaryContainer: {
-    marginTop: 10,
+    marginTop: 20,
     alignItems: "center",
-  },
-  text: {
-    fontSize: 20,
-    fontFamily: "Cochin"
-  },
+  }
 });
