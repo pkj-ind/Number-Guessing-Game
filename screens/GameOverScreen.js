@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import BodyText from "../components/BodyText";
 import TitleText from "../components/TitleText";
 import Colors from "../Constants/Colors";
+import MainButton from "../components/MainButton";
 
 const GameOverScreen = (props) => {
   return (
@@ -26,15 +27,11 @@ const GameOverScreen = (props) => {
         </TitleText>
 
         <BodyText>
-          Total number of guesses taken by Mobile is: {" "}
+          Total number of guesses taken by Mobile is:{" "}
           <Text style={styles.highlight}>{props.attemptCount}</Text>
         </BodyText>
         <BodyText>The Game is Over !!!{"\n"}</BodyText>
-        <Button
-          title="Start Again"
-          onPress={props.onRestart}
-          style={styles.button}
-        />
+        <MainButton onPress={props.onRestart}>Start Again</MainButton>
       </Card>
     </View>
   );
@@ -66,7 +63,6 @@ const styles = StyleSheet.create({
   },
   highlight: {
     color: Colors.primary,
-    fontSize:20
-
+    fontSize: 20,
   },
 });
