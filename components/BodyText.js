@@ -7,6 +7,7 @@ export default BodyText
 
 const styles = StyleSheet.create({
     text:{
-     fontFamily:"open-sans"
+     fontFamily:"open-sans",
+     textAlign:"center"
     }
 })
