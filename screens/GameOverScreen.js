@@ -27,11 +27,12 @@ const GameOverScreen = (props) => {
         </TitleText>
 
         <BodyText>
-          Total number of guesses taken by Mobile is:{" "}
+          Total number of guesses taken by Mobile is: {" "}
           <Text style={styles.highlight}>{props.attemptCount}</Text>
         </BodyText>
         <BodyText>The Game is Over !!!{"\n"}</BodyText>
-        <MainButton onPress={props.onRestart}>Start Again</MainButton>
+        <MainButton onPress={props.onRestart}>Start Again</MainButton>  
+        
       </Card>
     </View>
   );
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
   },
   highlight: {
     color: Colors.primary,
-    fontSize: 20,
+    fontSize:20
+
   },
 });
