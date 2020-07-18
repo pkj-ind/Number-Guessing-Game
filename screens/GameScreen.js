@@ -1,5 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, Text, View, Alert, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  ScrollView,
+  FlatList,
+} from "react-native";
 
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
@@ -68,17 +75,39 @@ const GameScreen = (props) => {
     trackGuessCount(nextNumber);
   };
 
-  const rederListItem = (value) => {
-   return  ( <View key={pastGussess.indexOf(value) + 1} style={{ flexDirection: "row" }}>
-      <View style={styles.list}>
-        <BodyText>#{pastGussess.length - pastGussess.indexOf(value)}</BodyText>
-      </View>
-      <View style={styles.list}>
-        <BodyText>{value}</BodyText>
-      </View>
-    </View>
-  )};
-  
+  // const rederListItem = (value) => {
+  //   return (
+  //     <View
+  //       key={pastGussess.indexOf(value) + 1}
+  //       style={{ flexDirection: "row" }}
+  //     >
+  //       <View style={styles.list}>
+  //         <BodyText>
+  //           #{pastGussess.length - pastGussess.indexOf(value)}
+  //         </BodyText>
+  //       </View>
+  //       <View style={styles.list}>
+  //         <BodyText>{value}</BodyText>
+  //       </View>
+  //     </View>
+  //   );
+  // };
+
+  const rederListItem = (itemData) => (
+<View
+            key={pastGussess.indexOf(itemData.item) + 1}
+            style={{ flexDirection: "row" }}
+          >
+            <View style={styles.list}>
+              <BodyText>
+                #{pastGussess.length - pastGussess.indexOf(itemData.item)}
+              </BodyText>
+            </View>
+            <View style={styles.list}>
+              <BodyText>{itemData.item}</BodyText>
+            </View>
+          </View>
+  )
   return (
     <View style={styles.screen}>
       <BodyText>Computer's Guess:</BodyText>
@@ -101,9 +130,15 @@ const GameScreen = (props) => {
         Below list contains previous gusses:
         {"\n"}
       </BodyText>
-      <ScrollView>
+      {/* <ScrollView>
         {pastGussess.map(guess => rederListItem(guess))}
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList
+        keyExtractor={(item) => item.toString() } // by default it takes accepts object with id,since it is just an array of number, use key Extractor to avoid Virtualized missing key
+        data={pastGussess}
+        renderItem={rederListItem.bind(this)}
+        //renderItem={renderListItem.bind(this, pastGuesses.length)}
+      />
     </View>
   );
 };
