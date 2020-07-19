@@ -100,7 +100,7 @@ const GameScreen = (props) => {
           >
             <View style={styles.list}>
               <BodyText>
-                #{pastGussess.length - pastGussess.indexOf(itemData.item)}
+               Guess #{pastGussess.length - pastGussess.indexOf(itemData.item)}
               </BodyText>
             </View>
             <View style={styles.list}>
@@ -113,21 +113,21 @@ const GameScreen = (props) => {
       <BodyText>Computer's Guess:</BodyText>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
+        <View>
         <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
           <FontAwesome5 name="less-than" size={24} color="white" />
         </MainButton>
-
+        <BodyText>Less-than</BodyText>
+        </View>
+        <View>
         <MainButton onPress={nextGuessHandler.bind(this, "greater")}>
           <FontAwesome5 name="greater-than" size={24} color="white" />
         </MainButton>
+        <BodyText>Greater</BodyText>
+        </View> 
       </Card>
       <BodyText>
-        Note: Please press Greater/Lower button if your number is greater/lower
-        than displayed number.
-        {"\n"}
-      </BodyText>
-      <BodyText>
-        Below list contains previous gusses:
+      Hint: Please click appropriate button after comparing your chossen number with displayed number.
         {"\n"}
       </BodyText>
       {/* <ScrollView>
