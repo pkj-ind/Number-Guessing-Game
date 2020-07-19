@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "rn-third-app",
-    "slug": "rn-third-app",
+    "name": "NumberGasser",
+    "slug": "numbergasser",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "This is a game , where user  choose a Number and computer try to guess.  "
   }
 }
