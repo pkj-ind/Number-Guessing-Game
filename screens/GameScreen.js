@@ -6,7 +6,7 @@ import {
   Alert,
   ScrollView,
   FlatList,
-  Dimensions
+  Dimensions,
 } from "react-native";
 
 import NumberContainer from "../components/NumberContainer";
@@ -22,6 +22,31 @@ import {
 } from "@expo/vector-icons";
 
 const GameScreen = (props) => {
+  const [availableWidth, setAvailableWidth] = useState(
+    Dimensions.get("window").width
+  );
+  const [availableHeight, setAvailablHeight] = useState(
+    Dimensions.get("window").height
+  );
+
+  const updateLayout = () => {
+    setAvailableWidth(Dimensions.get("window").width);
+    setAvailablHeight(Dimensions.get("window").height);
+  };
+
+  useEffect(() => {
+    if(availableHeight < availableWidth){
+      console.log("I am in Landscape mode and available Height is: ",availableHeight)
+    }
+    else
+    console.log("I am in Potrait mode and available Height is: ",availableHeight)
+    Dimensions.addEventListener("change", updateLayout);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
+  }),[updateLayout];
+
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
 
@@ -95,52 +120,83 @@ const GameScreen = (props) => {
   // };
 
   const rederListItem = (itemData) => (
-<View
-            key={pastGussess.indexOf(itemData.item) + 1}
-            style={{ flexDirection: "row" }}
-          >
-            <View style={styles.list}>
-              <BodyText>
-               Guess #{pastGussess.length - pastGussess.indexOf(itemData.item)}
-              </BodyText>
-            </View>
-            <View style={styles.list}>
-              <BodyText>{itemData.item}</BodyText>
-            </View>
-          </View>
-  )
-  return (
-    <View style={styles.screen}>
-      <BodyText>Computer's Guess:</BodyText>
-      <NumberContainer>{currentGuess}</NumberContainer>
-      <Card style={styles.buttonContainer}>
-        <View>
+    <View
+      key={pastGussess.indexOf(itemData.item) + 1}
+      style={{ flexDirection: "row" }}
+    >
+      <View style={styles.list}>
+        <BodyText>
+          Guess #{pastGussess.length - pastGussess.indexOf(itemData.item)}
+        </BodyText>
+      </View>
+      <View style={styles.list}>
+        <BodyText>{itemData.item}</BodyText>
+      </View>
+    </View>
+  );
+
+
+
+  let gameControl = ( 
+    <>
+  <NumberContainer>{currentGuess}</NumberContainer>
+    <Card style={styles.buttonContainer}>
+      <View>
         <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
           <FontAwesome5 name="less-than" size={24} color="white" />
         </MainButton>
         <BodyText>Less-than</BodyText>
-        </View>
+      </View>
+      <View>
+        <MainButton onPress={nextGuessHandler.bind(this, "greater")}>
+          <FontAwesome5 name="greater-than" size={24} color="white" />
+        </MainButton>
+        <BodyText>Greater</BodyText>
+      </View>
+    </Card>
+    </>
+   )
+
+   if(availableHeight < 500){
+    gameControl=( 
+    <Card style={styles.buttonContainer}>
+      <View>
+        <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
+          <FontAwesome5 name="less-than" size={24} color="white" />
+        </MainButton>
+        <BodyText>Less-than</BodyText>
+      </View>
+      <NumberContainer>{currentGuess}</NumberContainer>
         <View>
         <MainButton onPress={nextGuessHandler.bind(this, "greater")}>
           <FontAwesome5 name="greater-than" size={24} color="white" />
         </MainButton>
         <BodyText>Greater</BodyText>
-        </View> 
-      </Card>
+      </View>
+    </Card>)
+   }
+  return (
+    
+    <View style={styles.screen}>
+      <BodyText>Computer's Guess:</BodyText>
+      {gameControl}
       <BodyText>
-      Hint: Please click appropriate button after comparing your chossen number with displayed number.
+        Hint: Please click appropriate button after comparing your chossen
+        number with displayed number.
         {"\n"}
       </BodyText>
       {/* <ScrollView>
         {pastGussess.map(guess => rederListItem(guess))}
       </ScrollView> */}
+      
       <FlatList
-        keyExtractor={(item) => item.toString() } // by default it takes accepts object with id,since it is just an array of number, use key Extractor to avoid Virtualized missing key
+        keyExtractor={(item) => item.toString()} // by default it takes accepts object with id,since it is just an array of number, use key Extractor to avoid Virtualized missing key
         data={pastGussess}
         renderItem={rederListItem.bind(this)}
         //renderItem={renderListItem.bind(this, pastGuesses.length)}
       />
-    </View>
+      </View>
+   
   );
 };
 
