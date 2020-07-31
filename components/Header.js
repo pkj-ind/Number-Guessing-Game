@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Platform } from 'react-native'
 import Colors from "../Constants/Colors"
 
 const Header = (props) => {
@@ -17,12 +17,14 @@ header:{
     width:'100%',
     height:90,
     paddingTop:36,
-    backgroundColor:Colors.primary,
+    backgroundColor: Platform.OS === "android" ? Colors.primary : "white",
     alignItems:"center",
-    justifyContent:"center"
+    justifyContent:"center",
+    borderBottomWidth:  Platform.OS === "android" ? 0 : 1,
+    borderBottomColor: Platform.OS === "android" ? "transparent" : "#ccc"
 },
 title:{
-    color:"black",
+    color: Platform.OS === "ios" ? Colors.primary : "white",
     fontSize:18,
 }
 })
