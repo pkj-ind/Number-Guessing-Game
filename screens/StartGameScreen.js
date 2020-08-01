@@ -9,7 +9,7 @@ import {
   Alert,
   Dimensions,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import Card from "../components/Card";
 import Colors from "../Constants/Colors";
@@ -28,17 +28,16 @@ const StartGameScreen = (props) => {
     Dimensions.get("window").width / 4
   );
   const updateLayout = () => {
-    setButtonWidth(Dimensions.get("window").width / 4)
-  }
+    setButtonWidth(Dimensions.get("window").width / 4);
+  };
 
-  useEffect(()=>{
-    
-    Dimensions.addEventListener("change",updateLayout);
+  useEffect(() => {
+    Dimensions.addEventListener("change", updateLayout);
 
-    return ()=>{
-      Dimensions.removeEventListener("change",updateLayout);
-    }
-  },[updateLayout])
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
+  }, [updateLayout]);
   const InputHandler = (inputText) => {
     setUserInput(inputText.replace(/[^0-9]/g, ""));
   };
@@ -46,7 +45,7 @@ const StartGameScreen = (props) => {
   const resetInputHandler = (e) => {
     setUserInput("");
   };
-  
+
   const confirmInputHandler = () => {
     let choosenNumber = parseInt(userInput);
     if (isNaN(choosenNumber) || choosenNumber <= 0) {
@@ -80,48 +79,48 @@ const StartGameScreen = (props) => {
   return (
     <ScrollView>
       <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={30}>
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
-    >
-      <View style={styles.screen}>
-        <TitleText style={styles.title}>Start a New Game!</TitleText>
-        <Card style={styles.inputContainer}>
-          <Text style={DefaultStyles.bodyText}>Select a Number</Text>
-          <Input
-            style={styles.input}
-            blurOnSubmit
-            keyboardType="number-pad"
-            maxLength={2}
-            autoCorrect={false}
-            autoCapitalize="none"
-            value={userInput}
-            onChangeText={InputHandler}
-          />
-          <View style={styles.buttonContainer}>
-            <View style={{width:buttonWidth}}>
-              <Button
-                title="Reset"
-                onPress={(e) => {
-                  resetInputHandler(e);
-                }}
-                color={Colors.accent}
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Keyboard.dismiss();
+          }}
+        >
+          <View style={styles.screen}>
+            <TitleText style={styles.title}>Start a New Game!</TitleText>
+            <Card style={styles.inputContainer}>
+              <Text style={DefaultStyles.bodyText}>Select a Number</Text>
+              <Input
+                style={styles.input}
+                blurOnSubmit
+                keyboardType="number-pad"
+                maxLength={2}
+                autoCorrect={false}
+                autoCapitalize="none"
+                value={userInput}
+                onChangeText={InputHandler}
               />
-            </View>
-            <View style={{width:buttonWidth}}>
-              <Button
-                title="Confirm"
-                onPress={confirmInputHandler}
-                color={Colors.primary}
-              />
-            </View>
+              <View style={styles.buttonContainer}>
+                <View style={{ width: buttonWidth }}>
+                  <Button
+                    title="Reset"
+                    onPress={(e) => {
+                      resetInputHandler(e);
+                    }}
+                    color={Colors.accent}
+                  />
+                </View>
+                <View style={{ width: buttonWidth }}>
+                  <Button
+                    title="Confirm"
+                    onPress={confirmInputHandler}
+                    color={Colors.primary}
+                  />
+                </View>
+              </View>
+            </Card>
+            {confirmedOutput}
           </View>
-        </Card>
-        {confirmedOutput}
-      </View>
-    </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 };

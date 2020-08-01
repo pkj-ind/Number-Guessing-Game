@@ -35,17 +35,18 @@ const GameScreen = (props) => {
   };
 
   useEffect(() => {
-    if(availableHeight < availableWidth){
-      console.log("I am in Landscape mode and available Height is: ",availableHeight)
-    }
-    else
-    console.log("I am in Potrait mode and available Height is: ",availableHeight)
+    // if(availableHeight < availableWidth){
+    //   console.log("I am in Landscape mode and available Height is: ",availableHeight)
+    // }
+    // else
+    // console.log("I am in Potrait mode and available Height is: ",availableHeight)
     Dimensions.addEventListener("change", updateLayout);
 
     return () => {
       Dimensions.removeEventListener("change", updateLayout);
     };
-  }),[updateLayout];
+  }),
+    [updateLayout];
 
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
@@ -67,7 +68,7 @@ const GameScreen = (props) => {
 
   useEffect(() => {
     if (currentGuess === props.userChoice) {
-      console.log("You got the correct number");
+      // console.log("You got the correct number");
       props.onGameOver(pastGussess.length);
     }
   });
@@ -135,48 +136,46 @@ const GameScreen = (props) => {
     </View>
   );
 
-
-
-  let gameControl = ( 
+  let gameControl = (
     <>
-  <NumberContainer>{currentGuess}</NumberContainer>
-    <Card style={styles.buttonContainer}>
-      <View>
-        <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
-          <FontAwesome5 name="less-than" size={24} color="white" />
-        </MainButton>
-        <BodyText>Less-than</BodyText>
-      </View>
-      <View>
-        <MainButton onPress={nextGuessHandler.bind(this, "greater")}>
-          <FontAwesome5 name="greater-than" size={24} color="white" />
-        </MainButton>
-        <BodyText>Greater</BodyText>
-      </View>
-    </Card>
-    </>
-   )
-
-   if(availableHeight < 500){
-    gameControl=( 
-    <Card style={styles.buttonContainer}>
-      <View>
-        <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
-          <FontAwesome5 name="less-than" size={24} color="white" />
-        </MainButton>
-        <BodyText>Less-than</BodyText>
-      </View>
       <NumberContainer>{currentGuess}</NumberContainer>
+      <Card style={styles.buttonContainer}>
         <View>
-        <MainButton onPress={nextGuessHandler.bind(this, "greater")}>
-          <FontAwesome5 name="greater-than" size={24} color="white" />
-        </MainButton>
-        <BodyText>Greater</BodyText>
-      </View>
-    </Card>)
-   }
+          <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
+            <FontAwesome5 name="less-than" size={24} color="white" />
+          </MainButton>
+          <BodyText>Less-than</BodyText>
+        </View>
+        <View>
+          <MainButton onPress={nextGuessHandler.bind(this, "greater")}>
+            <FontAwesome5 name="greater-than" size={24} color="white" />
+          </MainButton>
+          <BodyText>Greater</BodyText>
+        </View>
+      </Card>
+    </>
+  );
+
+  if (availableHeight < 500) {
+    gameControl = (
+      <Card style={styles.buttonContainer}>
+        <View>
+          <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
+            <FontAwesome5 name="less-than" size={24} color="white" />
+          </MainButton>
+          <BodyText>Less-than</BodyText>
+        </View>
+        <NumberContainer>{currentGuess}</NumberContainer>
+        <View>
+          <MainButton onPress={nextGuessHandler.bind(this, "greater")}>
+            <FontAwesome5 name="greater-than" size={24} color="white" />
+          </MainButton>
+          <BodyText>Greater</BodyText>
+        </View>
+      </Card>
+    );
+  }
   return (
-    
     <View style={styles.screen}>
       <BodyText>Computer's Guess:</BodyText>
       {gameControl}
@@ -188,15 +187,14 @@ const GameScreen = (props) => {
       {/* <ScrollView>
         {pastGussess.map(guess => rederListItem(guess))}
       </ScrollView> */}
-      
+
       <FlatList
         keyExtractor={(item) => item.toString()} // by default it takes accepts object with id,since it is just an array of number, use key Extractor to avoid Virtualized missing key
         data={pastGussess}
         renderItem={rederListItem.bind(this)}
         //renderItem={renderListItem.bind(this, pastGuesses.length)}
       />
-      </View>
-   
+    </View>
   );
 };
 
