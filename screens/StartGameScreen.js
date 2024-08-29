@@ -32,10 +32,11 @@ const StartGameScreen = (props) => {
   };
 
   useEffect(() => {
-    Dimensions.addEventListener("change", updateLayout);
-
+    const subscription = Dimensions.addEventListener("change", updateLayout);
+    
     return () => {
-      Dimensions.removeEventListener("change", updateLayout);
+      // Dimensions.removeEventListener("change", updateLayout);
+      subscription?.remove();
     };
   }, [updateLayout]);
   const InputHandler = (inputText) => {

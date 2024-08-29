@@ -40,10 +40,10 @@ const GameScreen = (props) => {
     // }
     // else
     // console.log("I am in Potrait mode and available Height is: ",availableHeight)
-    Dimensions.addEventListener("change", updateLayout);
+    const subscription = Dimensions.addEventListener("change", updateLayout);
 
     return () => {
-      Dimensions.removeEventListener("change", updateLayout);
+      subscription?.remove();
     };
   }),
     [updateLayout];
